@@ -5,17 +5,36 @@ import TaskComponent from "../pure/task";
 
 // Importamos la hoja de estilos de task.scss
 import "../../styles/task.scss";
+import TaskForm from "../pure/forms/taskForm";
 
 const TaskListComponent = () => {
-  const defaultTask = new Task(
-    "Example",
-    "Default description",
+  const defaultTask1 = new Task(
+    "Example 1",
+    "Description 1",
     false,
     LEVELS.NORMAL
   );
 
+  const defaultTask2 = new Task(
+    "Example 2",
+    "Description 2",
+    true,
+    LEVELS.URGENT
+  );
+
+  const defaultTask3 = new Task(
+    "Example 3",
+    "Description 3",
+    true,
+    LEVELS.BLOCKING
+  );
+
   // Estado del componente
-  const [tasks, setTasks] = useState([defaultTask]);
+  const [tasks, setTasks] = useState([
+    defaultTask1,
+    defaultTask2,
+    defaultTask3,
+  ]);
   const [loading, setLoading] = useState(true);
 
   // Control del ciclo de vida del componente
@@ -36,11 +55,13 @@ const TaskListComponent = () => {
       <div className="col-12">
         <div className="card">
           <div className="card-header p-3">
-            <h5>
-              Your Tasks:
-            </h5>
+            <h5>Your Tasks:</h5>
           </div>
-          <div className="card-body" data-mdb-perfect-scrollbar="true" style={{ position: "relative", height: "400px" }}>
+          <div
+            className="card-body"
+            data-mdb-perfect-scrollbar="true"
+            style={{ position: "relative", height: "400px" }}
+          >
             <table>
               <thead>
                 <tr>
@@ -51,10 +72,13 @@ const TaskListComponent = () => {
                 </tr>
               </thead>
               <tbody>
-                <TaskComponent task={defaultTask}></TaskComponent>
+                {tasks.map((task, index) => {
+                  return <TaskComponent key={index} task={task} />;
+                })}
               </tbody>
             </table>
           </div>
+          <TaskForm/>
         </div>
       </div>
     </div>
