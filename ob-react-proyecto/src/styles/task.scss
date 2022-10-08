@@ -6,3 +6,13 @@ h1 {
     font-weight: bold;
     color: cadetblue
 }
+
+.task-completed{
+  color: gray;
+  text-decoration: line-through;
+}
+
+.task-pending{
+  font-weight: bold;
+  color: tomato;
+}
