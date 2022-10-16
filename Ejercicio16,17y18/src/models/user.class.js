@@ -4,13 +4,15 @@ export class User{
   username = '';
   email = '';
   password = '';
-  role = ROLES.USER
+  role = ROLES.USER;
+  conected = false
 
-  constructor(username, email, password, role){
+  constructor(username, email, password, role, conected){
     this.username = username;
     this.email = email;
     this.password = password;
-    this.role = role
+    this.role = role;
+    this.conected = conected
   }
  
 }

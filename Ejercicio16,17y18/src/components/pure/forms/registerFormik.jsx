@@ -13,6 +13,7 @@ const RegisterFormik = () => {
     password: "",
     confirm: "", //to confirm password
     role: ROLES.USER,
+    conected: false
   };
 
   const registerSchema = Yup.object().shape({
@@ -40,10 +41,6 @@ const RegisterFormik = () => {
       .required("Confirm password is required"),
   });
 
-  const submit = (values) => {
-    console.log("Regiser user");
-  };
-
   return (
     <div className="d-flex flex-column align-items-center m-5">
       <h4>Register Formik</h4>
@@ -56,8 +53,8 @@ const RegisterFormik = () => {
           navigate('/login');
         }}
       >
-        {({ values, errors, isSubmitting, handleChange, handleBlur }) => (
-          <Form style={{display: 'flex', flexDirection: 'column', width: '20%' }}>
+        {({ isSubmitting }) => (
+          <Form style={{ display: 'flex', flexDirection: 'column' }}>
             <label htmlFor="username">Username</label>
             <Field
               id="username"
@@ -98,14 +95,6 @@ const RegisterFormik = () => {
               type="submit"
             >
               Register Account
-            </Button>
-            <Button
-              style={{ width: "100%", marginTop: "10px" }}
-              size="large"
-              variant="contained"
-              onClick={() => navigate("/login")}
-            >
-              Go to Login Page
             </Button>
             {isSubmitting ? <p>Sending your credentials...</p> : null}
           </Form>

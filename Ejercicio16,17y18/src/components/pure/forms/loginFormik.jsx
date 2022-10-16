@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 const loginSchema = Yup.object().shape({
@@ -11,13 +10,11 @@ const loginSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
-const LoginFormik = () => {
+const LoginFormik = ({ setCredentials }) => {
   const initialCredentials = {
     email: "",
     password: "",
   };
-
-  const navigate = useNavigate();
 
   return (
     <div className="d-flex flex-column align-items-center m-5">
@@ -28,11 +25,13 @@ const LoginFormik = () => {
         //* Yup Validation Schema */
         validationSchema={loginSchema}
         //* onSubmit Event */
-        onSubmit={async (values) => {
+        onSubmit={async (values, { setSubmitting, resetForm } ) => {
           await new Promise((r) => setTimeout(r, 1000));
-          alert(JSON.stringify(values, null, 2));
-          // We save the data in the localstorage
-          navigate("/");
+          // alert(JSON.stringify(values, null, 2));
+          // We save the data in the sessionStorage
+          resetForm();
+          setSubmitting(false);
+          setCredentials(values);
         }}
       >
         {(props) => {
@@ -64,14 +63,6 @@ const LoginFormik = () => {
                 type="submit"
               >
                 Login
-              </Button>
-              <Button
-                style={{ marginTop: "10px" }}
-                size="large"
-                variant="contained"
-                onClick={() => navigate("/register")}
-              >
-                Register here
               </Button>
               {isSubmitting ? <p>Login your credentials...</p> : null}
             </Form>

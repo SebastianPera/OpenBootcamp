@@ -3,7 +3,7 @@ import TaskListComponent from './../../components/container/task_list';
 
 const TaskPage = () => {
   return (
-    <div><TaskListComponent/></div>
+    <div style={{ display: 'flex', justifyContent: 'center' }}><TaskListComponent/></div>
   )
 }
 

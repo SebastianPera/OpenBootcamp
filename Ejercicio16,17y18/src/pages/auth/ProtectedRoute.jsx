@@ -1,15 +1,13 @@
-import { useContext } from 'react';
-import AuthContext from '../../context/AuthContext';
-import { Navigate } from 'react-router-dom';
-
+import { Navigate, useLocation } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
 
-  const { user } = useContext(AuthContext);
+  const user = JSON.parse(sessionStorage.getItem("credentials")) || null;
+  const location = useLocation();
 
-  if (!user) {
-    return <Navigate to='/login'/>
-  }
+  if (!(user && user.conected === true)) {
+    return <Navigate to='/login' state={{ location }}/>
+  } 
 
   return children;
 }

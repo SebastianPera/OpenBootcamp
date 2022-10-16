@@ -47,7 +47,6 @@ const TaskListComponent = () => {
   }, [tasks]);
 
   function completeTask(task) {
-    console.log("Complete this Task:", task);
     const index = tasks.indexOf(task);
     const tempTasks = [...tasks];
     tempTasks[index].completed = !tempTasks[index].completed;
@@ -57,7 +56,6 @@ const TaskListComponent = () => {
   }
 
   function deleteTask(task) {
-    console.log("Detele this Task:", task);
     const index = tasks.indexOf(task);
     const tempTasks = [...tasks];
     tempTasks.splice(index, 1);
@@ -65,7 +63,6 @@ const TaskListComponent = () => {
   }
 
   function addTask(task) {
-    console.log("Detele this Task:", task);
     const tempTasks = [...tasks];
     tempTasks.push(task);
     setTasks(tempTasks);
